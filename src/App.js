@@ -1,6 +1,7 @@
 import './App.css';
 import Movies from './components/movies';
 import Like from './components/common/like';
+import Pagination from './components/pagination';
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <main className = "container">
         <Movies/>
         {/* <Like/> */}
+        {/* <Pagination/> */}
+
 
       </main>
     </>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { getMovies } from '../services/fakeMovieService';
 import Like from './common/like';
+import Pagination from './pagination';
 class Movies extends Component {
   state = {
     movies: getMovies(),
     liked: false,
+    pageSize: 4,
   };
 
   handleDelete = (movie) => {
@@ -12,22 +14,26 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
-  handleLike = (movie) =>{
-
+  handleLike = (movie) => {
     // console.log("movie", movie);
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
-    movies[index] = {...movies[index]}
+    movies[index] = { ...movies[index] };
     movies[index].liked = !movies[index].liked;
-    this.setState({movies});
-
+    this.setState({ movies });
   };
+
+  handlePageChange = (page) => {
+    console.log(page)
+
+  }
+
   render() {
-    const { length } = this.state.movies;
-    if (length === 0) return <p>No movies in the database.</p>;
+    const { count } = this.state.movies;
+    if (count === 0) return <p>No movies in the database.</p>;
     return (
       <>
-        <p>Showing {length} movies in the database.</p>
+        <p>Showing {count} movies in the database.</p>
         <table class="table">
           <thead>
             <tr>
@@ -47,7 +53,10 @@ class Movies extends Component {
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <Like liked={movie.liked} onClick={() => this.handleLike(movie)}></Like>
+                  <Like
+                    liked={movie.liked}
+                    onClick={() => this.handleLike(movie)}
+                  ></Like>
                 </td>
                 <td>
                   <button
@@ -61,6 +70,11 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemsCount={count}
+          pageSize={this.state.pageSize}
+          onPageChange={this.handlePageChange}
+        />
       </>
     );
   }
