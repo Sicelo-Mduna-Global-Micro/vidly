@@ -36,5 +36,6 @@ Pagination.propTypes = {
   onPageChange: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired
 }
+
 export default Pagination;
 
