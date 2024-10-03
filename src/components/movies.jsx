@@ -12,8 +12,11 @@ class Movies extends Component {
 
   }
   render() {
+    const {length} = this.state.movies
+    if (length === 0) return <p>No movies in the database.</p>;
     return (
       <>
+        <p>Showing {length} movies in the database.</p>
         <table class="table">
           <thead>
             <tr>
@@ -26,15 +29,14 @@ class Movies extends Component {
           </thead>
           <tbody>
             {this.state.movies.map((movie) => (
-              <tr key = {movie._id}>
+              <tr key={movie._id}>
                 <th scope="row">{movie.title}</th>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
                   <button
-                    onClick={() =>  this.handleDelete(movie)}
-
+                    onClick={() => this.handleDelete(movie)}
                     className="btn btn-danger btn-sm"
                   >
                     Delete
