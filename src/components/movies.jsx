@@ -29,7 +29,7 @@ class Movies extends Component {
   }
 
   render() {
-    const { count } = this.state.movies;
+    const {length : count } = this.state.movies;
     if (count === 0) return <p>No movies in the database.</p>;
     return (
       <>
