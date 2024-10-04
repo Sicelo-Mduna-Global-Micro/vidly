@@ -21,12 +21,6 @@ class Movies extends Component {
     this.setState({ movies: getMovies(), genres: getGenres() });
   }
 
-  // componentDidMount() {
-  //     const movies = getMovies();
-  //     const genres = [...new Set(movies.map(m => m.genre.name))];
-  //     this.setState({ movies, genres });
-  //   }
-
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
@@ -61,9 +55,11 @@ class Movies extends Component {
     return (
       <>
         <div className="row">
-          <div className="col-2">
+          <div className="col-3">
             <ListGroup
               items={this.state.genres}
+              textProperty = "name"
+              valueProperty = "_id"
               onItemSelect={this.handleGenreSelect}
             />
           </div>
